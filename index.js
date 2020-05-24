@@ -6,7 +6,7 @@ module.exports = exports = create
 
 function create(bucket, awss3, { instanceId, dbName, collectionName }) {
   let s3 = createS3(awss3, bucket)
-  let instance = new Instance(instanceId)
+  let instance = new Instance(s3, instanceId)
   let db = null
   let collection = null
   if (dbName) {
