@@ -1,6 +1,6 @@
 {
   "name": "@songodb/songodb-mongo-s3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic MongoDB API implemented over AWS S3 Javascript SDK.",
   "main": "index.js",
   "scripts": {
