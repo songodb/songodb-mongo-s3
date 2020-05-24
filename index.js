@@ -4,9 +4,8 @@ const { Instance } = require('./lib/instance')
 
 module.exports = exports = create
 
-function create(bucket, awss3, { instanceId, dbName, collectionName }) {
-  let s3 = createS3(awss3, bucket)
-  let instance = new Instance(s3, instanceId)
+function create(awss3, bucket, { instanceId, dbName, collectionName }) {
+  let instance = new Instance(createS3(awss3, bucket), instanceId)
   let db = null
   let collection = null
   if (dbName) {
