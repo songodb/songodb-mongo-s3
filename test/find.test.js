@@ -118,6 +118,10 @@ describe('findMany', () => {
       docs: [  ]
     })
   })
+  it ('should support projection operation', async () => {
+    let result = await findMany(s3, prefix, { first: "Jane" }, { projection: { first: 1 } })
+    expect(result.docs).toEqual([ { _id: "1", first: "Jane" } ])
+  })
 })
 
 describe('findOne', () => {

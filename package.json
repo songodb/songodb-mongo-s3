@@ -1,6 +1,6 @@
 {
   "name": "@songodb/songodb-mongo-s3",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Basic MongoDB API implemented over AWS S3 Javascript SDK.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/songodb/songodb-s3#readme",
   "dependencies": {
-    "@songodb/mongojs": "^1.0.0",
+    "@songodb/mongojs": "^1.1.0",
     "@songodb/songodb-s3": "^1.2.1",
     "deep-equal": "^2.0.3",
     "sift": "^13.0.2",
