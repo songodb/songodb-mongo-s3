@@ -154,7 +154,7 @@ describe("update", () => {
       error = err
     }
     expect(error).toBeTruthy()
-    expect(error.message).toBe("Unknown modifier: last")
+    expect(error.message).toBe("Unsupported operation: last")
   })
   it ('should replaceOne', async () => {
     let result = await collection.replaceOne({ first: "Jane" }, { hello: "world" })
