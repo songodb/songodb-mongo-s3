@@ -48,6 +48,8 @@ describe('deleteMany', () => {
         }
       }
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should shortcut when deleting just using _id', async () => {
     let filter = { _id: "2" }
@@ -74,11 +76,15 @@ describe('deleteMany', () => {
         }
       }
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should not throw if prefix does not exist', async () => {
     let filter = { last: "Smith" }
     let result = await deleteMany(s3, prefix, filter)
     expect(result).toMatchObject({ "deletedCount": 0 })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
@@ -118,11 +124,15 @@ describe('deleteOne', () => {
         }
       }
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should not throw if none match', async () => {
     let filter = { last: "Smith" }
     let result = await deleteOne(s3, prefix, filter)
     expect(result).toMatchObject({ "deletedCount": 0 })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
@@ -164,6 +174,8 @@ describe('deleteAll', () => {
         }
       }
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
@@ -206,6 +218,8 @@ describe('deleteById', () => {
         }
       }
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should not throw if id does not exist', async () => {
     let result = await deleteById(s3, prefix, "BAD")
@@ -215,5 +229,7 @@ describe('deleteById', () => {
     expect(result).toMatchObject({
       "deletedCount": 1
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })

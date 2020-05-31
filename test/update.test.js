@@ -51,6 +51,8 @@ describe('updateMany', () => {
     expect(docs).toEqual([
       { _id: "1", first: "Jane", last: "Goodall" }
     ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should update and write multiple docs', async () => {
     let result = await updateMany(s3, prefix, { last: "Doe" }, { "$set": { last: "Smith" } })
@@ -66,6 +68,8 @@ describe('updateMany', () => {
       { _id: "2", first: "John", last: "Smith" },
       { _id: "3", first: "Joe", last: "Smith" } 
     ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should only write modified docs', async () => {
     let result = await updateMany(s3, prefix, { last: "Doe" }, { "$set": { first: "Jane" } })
@@ -75,6 +79,8 @@ describe('updateMany', () => {
       "upsertedCount": 0,
       "upsertedId": null
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should upsert if no docs match and upsert option is true', async () => {
     let result = await updateMany(s3, prefix, 
@@ -94,6 +100,8 @@ describe('updateMany', () => {
     expect(docs).toEqual([
       { _id: expect.anything(), first: "Jill", last: "Doe" } 
     ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should do nothing if no docs match', async () => {
     let result = await updateMany(s3, prefix, 
@@ -105,6 +113,8 @@ describe('updateMany', () => {
       "upsertedCount": 0,
       "upsertedId": null
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
@@ -147,6 +157,8 @@ describe('updateOne', () => {
     })
     let { docs } = await findOne(s3, prefix, { last: "Smith" })
     expect(docs).toEqual([ { "_id": "1", "first": "Jane", "last": "Smith" } ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should return nModified 0 if the one doc matched is not affected by update', async () => {
     let result = await updateOne(s3, prefix, { last: "Doe" }, { "$set": { last: "Doe" } })
@@ -156,6 +168,8 @@ describe('updateOne', () => {
       "upsertedCount": 0,
       "upsertedId": null,
     })
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
@@ -198,6 +212,8 @@ describe('replaceOne', () => {
     })
     let { docs } = await findMany(s3, prefix, { _id: "1" })
     expect(docs).toEqual([ { "_id": "1", first: "Jill", last: "Doe" } ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
   it ('should upsert a doc if upsert option is given', async () => {
     let result = await replaceOne(s3, prefix, 
@@ -212,6 +228,8 @@ describe('replaceOne', () => {
     })
     let { docs } = await findMany(s3, prefix, { first: "Jill" })
     expect(docs).toEqual([ { "_id": expect.anything(), first: "Jill", last: "Doe" } ])
+    //console.log(result.explain.executionStats.executionTimeMillis, result.explain.s3.TimeMillis)
+    expect(result.explain.executionStats.executionTimeMillis).toBeGreaterThanOrEqual(result.explain.s3.TimeMillis)
   })
 })
 
